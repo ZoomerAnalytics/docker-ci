@@ -1,5 +1,5 @@
 # Based on https://github.com/jonaskello/docker-and-compose
-# includes docker-compose and additionally rsync and openssh-client
+# includes docker-compose and additionally git, rsync and openssh-client
 # Docker image that can be used for dind and as such as base image to build docker containers
 
 FROM docker:1.12.3
@@ -10,7 +10,7 @@ ARG compose_version=1.8.1
 
 # Install docker-compose (extra complicated since the base image uses alpine as base)
 RUN apk update && apk add --no-cache \
-    curl openssl ca-certificates rsync openssh-client \
+    curl openssl ca-certificates rsync openssh-client git\
     && curl -L https://github.com/docker/compose/releases/download/${compose_version}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose \
     && chmod +x /usr/local/bin/docker-compose \
     && wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://raw.githubusercontent.com/sgerrand/alpine-pkg-glibc/master/sgerrand.rsa.pub \
